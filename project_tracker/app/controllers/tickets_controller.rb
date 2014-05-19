@@ -35,7 +35,6 @@ class TicketsController < ApplicationController
 
 		def ticket_params
 			params.require(:ticket).permit(:title, :description)
-
 		end
 
 end

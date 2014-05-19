@@ -32,6 +32,8 @@ feature "Creating Tickets" do
 		fill_in "Description", with: "it sucks"
 		click_button "Create Ticket"
 
+		expect(page).to have_content("Ticket has not been created")
+		expect(page).to have_content("Description is too short")
 
 	end
 end

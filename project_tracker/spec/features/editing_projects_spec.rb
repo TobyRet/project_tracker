@@ -21,7 +21,7 @@ feature "Editing Project" do
 		fill_in "Name", with: " "
 		click_button "Update Project"
 
-		expect(page).to have_content("Project has not been updated.")
+		expect(page).to have_content("Project has not been updated")
 
 	end
 end
