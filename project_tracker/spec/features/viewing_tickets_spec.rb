@@ -4,13 +4,9 @@ feature 'Viewing tickets' do
 
 	before do
 		textmate_2 = FactoryGirl.create(:project, name: "TextMate 2")
-
-		FactoryGirl.create(:ticket, project: textmate_2, title: "Make it shiny!", description: "Gradients! Starburst! Oh my!")
-
-		internet_explorer = FactoryGirl.create(:project, name: "Internet Explorer")
-
-		FactoryGirl.create(:ticket, project: internet_explorer, title: "Standards compliance", description: "Isn't it a joke.")
-
+		user = FactoryGirl.create(:user)
+		ticket = FactoryGirl.create(:ticket, project: textmate_2, title: "Make it shiny!", description: "Gradients! Starbursts! Oh my!")
+		ticket.update(user: user)
 		visit '/'
 	end
 
@@ -27,7 +23,7 @@ feature 'Viewing tickets' do
 			expect(page).to have_content("Make it shiny!")
 		end
 
-		expect(page).to have_content("Gradients! Starburst! Oh my!")
+		expect(page).to have_content("Gradients! Starbursts! Oh my!")
 
 
 
