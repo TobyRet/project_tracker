@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  get 'users/new'
+  
+  namespace :admin do
+    resources :users
+  end
 
-  get 'users/create'
-
-  get 'users/show'
+  #get 'users/new'
+#
+  #get 'users/create'
+#
+  #get 'users/show'
 
   get '/signin', to: "sessions#new"
 
