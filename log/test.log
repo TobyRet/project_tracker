@@ -1,0 +1,2181 @@
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "projects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "tickets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "description" text, "project_id" integer, "created_at" datetime, "updated_at" datetime, "user_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX "index_tickets_on_project_id" ON "tickets" ("project_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tickets_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tickets_on_project_id' AND type='index'
+[0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX "index_tickets_on_user_id" ON "tickets" ("user_id")
+  [1m[36m (1.6ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "password_digest" varchar(255), "created_at" datetime, "updated_at" datetime, "admin" boolean DEFAULT 'f') [0m
+  [1m[35m (1.5ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (1.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (2.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140525082944')[0m
+  [1m[35m (1.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140515162214')
+  [1m[36m (1.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140518224437')[0m
+  [1m[35m (1.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140519225543')
+  [1m[36m (3.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140523181259')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:13.419042"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$ZCu0LSnlG3tKZoMAuh81fOD7OoKqgYHuL2IKOn3LyzhXNO1oj1jBO"], ["updated_at", "2014-05-28 04:43:13.419042"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/users/1" for 127.0.0.1 at 2014-05-28 05:43:13 +0100
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 1012ms (Views: 1001.9ms | ActiveRecord: 0.1ms)
+Started GET "/users/1/edit" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered users/_form.html.erb (108.5ms)
+  Rendered users/edit.html.erb within layouts/application (138.0ms)
+Completed 200 OK in 149ms (Views: 147.5ms | ActiveRecord: 0.1ms)
+Started PATCH "/users/1" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by UsersController#update as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"name"=>"new_username", "email"=>"sample@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Update Profile", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: email
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.8ms)[0m  [1mUPDATE "users" SET "name" = ?, "updated_at" = ? WHERE "users"."id" = 1[0m  [["name", "new_username"], ["updated_at", "2014-05-28 04:43:14.738368"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/users/1
+Completed 302 Found in 5ms (ActiveRecord: 1.1ms)
+Started GET "/users/1" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:14.780767"], ["name", "TextMate 2"], ["updated_at", "2014-05-28 04:43:14.780767"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:14.784432"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$/dZFuJzmm9uiBbz5VOGoluVrmk.r5T13G3laBo4XUyHC7jSxjMZ4a"], ["updated_at", "2014-05-28 04:43:14.784432"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tickets" ("created_at", "description", "project_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:14.836663"], ["description", "Gradients! Starbursts! Oh my!"], ["project_id", 1], ["title", "Make it shiny!"], ["updated_at", "2014-05-28 04:43:14.836663"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "tickets" SET "updated_at" = ?, "user_id" = ? WHERE "tickets"."id" = 1  [["updated_at", "2014-05-28 04:43:14.840306"], ["user_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.2ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.2ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (22.2ms)
+Completed 200 OK in 26ms (Views: 24.3ms | ActiveRecord: 0.4ms)
+Started GET "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by TicketsController#show as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.1ms)[0m  SELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1  [["project_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tickets/show.html.erb within layouts/application (19.1ms)
+Completed 200 OK in 24ms (Views: 21.8ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.7ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:14.922787"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:14.922787"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:14.925881"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$W/BDpiMaEYjYGjBQL5j2/uMWLVMoBQ5p91SARl0Fbp5kpVjhZUwHW"], ["updated_at", "2014-05-28 04:43:14.925881"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to http://www.example.com/signin
+Filter chain halted as :require_signin! rendered or redirected
+Completed 302 Found in 8ms (ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:14 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (23.3ms)
+Completed 200 OK in 47ms (Views: 46.1ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 33ms (ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tickets/_form.html.erb (5.1ms)
+  Rendered tickets/new.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 0.1ms)
+Started POST "/projects/1/tickets" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#create as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"", "description"=>""}, "commit"=>"Create Ticket", "project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendered tickets/_form.html.erb (4.2ms)
+  Rendered tickets/new.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 10ms (Views: 5.6ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.122976"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.122976"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.125929"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$ZWE2XoOmsjCwENoxE8pcqeZqpicJneXHD2kVtUtRKp6UJl9gBU0MG"], ["updated_at", "2014-05-28 04:43:15.125929"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to http://www.example.com/signin
+Filter chain halted as :require_signin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tickets/_form.html.erb (1.9ms)
+  Rendered tickets/new.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 5ms (Views: 3.2ms | ActiveRecord: 0.1ms)
+Started POST "/projects/1/tickets" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#create as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"Non-standards compliance", "description"=>"My pages are ugly!"}, "commit"=>"Create Ticket", "project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tickets" ("created_at", "description", "project_id", "title", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.181370"], ["description", "My pages are ugly!"], ["project_id", 1], ["title", "Non-standards compliance"], ["updated_at", "2014-05-28 04:43:15.181370"], ["user_id", 1]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects/1/tickets/1
+Completed 302 Found in 4ms (ActiveRecord: 0.4ms)
+Started GET "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#show as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1  [["project_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tickets/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+  [1m[35m (1.5ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.197127"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.197127"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.200916"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$9CJSv1c/jViuCogwktna7.AnGYZUZ1sZoDABTdUTzXOM6H7E16Gxe"], ["updated_at", "2014-05-28 04:43:15.200916"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to http://www.example.com/signin
+Filter chain halted as :require_signin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tickets/_form.html.erb (2.0ms)
+  Rendered tickets/new.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 5ms (Views: 3.2ms | ActiveRecord: 0.1ms)
+Started POST "/projects/1/tickets" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#create as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"Non-standards compliance", "description"=>"it sucks"}, "commit"=>"Create Ticket", "project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendered tickets/_form.html.erb (2.2ms)
+  Rendered tickets/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 7ms (Views: 3.3ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.8ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-05-28 04:43:15.279227"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$iwiPD44jPH2/lXq5ugAN2.cngFYLcGv5sZrdnViCbbtvg.6ilZMRy"], ["updated_at", "2014-05-28 04:43:15.279227"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:43:15.307101"], ["name", "TextMate 2"], ["updated_at", "2014-05-28 04:43:15.307101"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/edit" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.0ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered projects/_form.html.erb (2.7ms)
+  Rendered projects/edit.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 7ms (Views: 6.0ms | ActiveRecord: 0.1ms)
+Started PATCH "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#update as HTML
+  Parameters: {"utf8"=>"✓", "project"=>{"name"=>"TextMate 2 beta", "description"=>""}, "commit"=>"Update Project", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.0ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "projects" SET "description" = ?, "name" = ?, "updated_at" = ? WHERE "projects"."id" = 1  [["description", ""], ["name", "TextMate 2 beta"], ["updated_at", "2014-05-28 04:43:15.335321"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-05-28 04:43:15.348947"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$bjnjoJz4R.t6xFhytAhUQe3aqGEptOVMB43qACp8NbiaQQQzmuU.u"], ["updated_at", "2014-05-28 04:43:15.348947"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:43:15.369014"], ["name", "TextMate 2"], ["updated_at", "2014-05-28 04:43:15.369014"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/edit" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.0ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered projects/_form.html.erb (2.3ms)
+  Rendered projects/edit.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 0.1ms)
+Started PATCH "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#update as HTML
+  Parameters: {"utf8"=>"✓", "project"=>{"name"=>" ", "description"=>""}, "commit"=>"Update Project", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.0ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  Rendered projects/_form.html.erb (2.7ms)
+  Rendered projects/edit.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 7ms (Views: 3.9ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.413837"], ["name", "toby"], ["password_digest", "$2a$04$AsUfdV6Yn06Tf7Wqx57zqeDt8Xfg5bgb31K25iUNdj.P4wFQ7EbRW"], ["updated_at", "2014-05-28 04:43:15.413837"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.423699"], ["name", "toby"], ["password_digest", "$2a$04$LaQnVXr.7AVzecAJEDwUBuBNEFkIZx7GlYlxHHKnR3C2b2vBYqDmK"], ["updated_at", "2014-05-28 04:43:15.423699"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.5ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.429575"], ["name", "toby"], ["password_digest", "$2a$04$iHoiLuuFQz8Fxlz.LLCLCuCLkc7BW1HYGNm2m3CXUbs9KozpCYAIq"], ["updated_at", "2014-05-28 04:43:15.429575"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.433930"], ["name", "TextMate 2"], ["updated_at", "2014-05-28 04:43:15.433930"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.7ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-05-28 04:43:15.457081"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$E.ov/QsyNLjOv7Wu6OsRgehMPJZT5/b36oK7U.0XUakWCSBazGMPm"], ["updated_at", "2014-05-28 04:43:15.457081"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+Started GET "/projects/new" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered projects/_form.html.erb (1.9ms)
+  Rendered projects/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.1ms)
+Started POST "/projects" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "project"=>{"name"=>"TextMate 2", "description"=>"A text editor for OS-X"}, "commit"=>"Create Project"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "projects" ("created_at", "description", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.495324"], ["description", "A text editor for OS-X"], ["name", "TextMate 2"], ["updated_at", "2014-05-28 04:43:15.495324"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects/1
+Completed 302 Found in 4ms (ActiveRecord: 0.5ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."name" = 'TextMate 2'  ORDER BY "projects"."id" ASC LIMIT 1[0m
+  [1m[35m (2.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-05-28 04:43:15.511725"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$xdRKZeer1Yw/rQ2e4VKUu.F0CTUaLyCWSS4jJzQpvnhNoxj8qZBgK"], ["updated_at", "2014-05-28 04:43:15.511725"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 2ms (Views: 2.0ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.1ms)
+Started GET "/projects/new" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered projects/_form.html.erb (2.1ms)
+  Rendered projects/new.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 0.1ms)
+Started POST "/projects" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "project"=>{"name"=>"", "description"=>""}, "commit"=>"Create Project"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendered projects/_form.html.erb (2.2ms)
+  Rendered projects/new.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 6ms (Views: 3.4ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.7ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.575594"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.575594"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.579355"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$fyDp9sMzA24vhYW1At/qee/tZRlfbMCmz07ERmtN2k3VGl2HHzwfu"], ["updated_at", "2014-05-28 04:43:15.579355"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "tickets" ("created_at", "description", "project_id", "title", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.581556"], ["description", "An example ticket, nothing more"], ["project_id", 1], ["title", "Example ticket"], ["updated_at", "2014-05-28 04:43:15.581556"], ["user_id", 1]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#show as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1[0m  [["project_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started DELETE "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#destroy as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1  [["project_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "tickets" WHERE "tickets"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.1ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.8ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.657715"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$/bVLUjev39e2aBLH8r98z.9/DdpBqe/bNWS3zsDyKoxi1RaBgNVTm"], ["updated_at", "2014-05-28 04:43:15.657715"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.659564"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.659564"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to http://test.host/
+Filter chain halted as :authorize_admin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.7ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.689486"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$KnMhmFWVB0Yio42NpCLqyOJGu36fbKfeXr9gkjHvgPOa8c72/Pmwy"], ["updated_at", "2014-05-28 04:43:15.689486"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:43:15.691361"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.691361"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ProjectsController#update as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to http://test.host/
+Filter chain halted as :authorize_admin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.701070"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$80Kc3kCJADPJ9jEV.hRSY.9naR2VbQDNzsiWM6Vhx0KxtNOqttxTS"], ["updated_at", "2014-05-28 04:43:15.701070"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.702671"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.702671"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ProjectsController#create as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to http://test.host/
+Filter chain halted as :authorize_admin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.709905"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$cNCM4I5/pWiliOg0mKHtxOFZGWN31OBKyyxKaqzHOMaYHWM0hwSHu"], ["updated_at", "2014-05-28 04:43:15.709905"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:43:15.711594"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.711594"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to http://test.host/
+Filter chain halted as :authorize_admin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+  [1m[36m (0.5ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.719461"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$HEuRuPLo8MpK9eSywNGLce8Jh3OjbGDAv15gmI13iboN7EZEjNaxq"], ["updated_at", "2014-05-28 04:43:15.719461"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.721058"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.721058"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ProjectsController#new as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to http://test.host/
+Filter chain halted as :authorize_admin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"not-here"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 0]]
+Redirected to http://test.host/projects
+Filter chain halted as :set_project rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+Started GET "/users/new" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (2.7ms)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.0ms)
+Started POST "/users" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"name"=>"", "email"=>"user@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+Unpermitted parameters: email
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.750927"], ["name", ""], ["password_digest", "$2a$04$.QLsIlkfpwC.FgQ5PlqWs.MBT2us1xeooz9GJX6AjaviWVgHvMdwO"], ["updated_at", "2014-05-28 04:43:15.750927"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 4ms (ActiveRecord: 0.3ms)
+Started GET "/projects" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+  [1m[35m (2.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.765062"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$QypccW2iFZhIRJqahGXd/uNWq7ArEXbgMOxxWMvMrbM2H99VGj416"], ["updated_at", "2014-05-28 04:43:15.765062"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+Completed 200 OK in 2ms (Views: 2.0ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.789437"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.789437"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.792876"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$gWpBgV9Gk0vIZDwgDHro0eH76LLVlvvgePorr.Rqi3jgj5CL5gmxa"], ["updated_at", "2014-05-28 04:43:15.792876"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "tickets" ("created_at", "description", "project_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.794562"], ["description", "An example ticket, nothing more"], ["project_id", 1], ["title", "Example ticket"], ["updated_at", "2014-05-28 04:43:15.794562"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "tickets" SET "updated_at" = ?, "user_id" = ? WHERE "tickets"."id" = 1  [["updated_at", "2014-05-28 04:43:15.795700"], ["user_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#show as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1  [["project_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+Started GET "/projects/1/tickets/1/edit" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#edit as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1[0m  [["project_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/_form.html.erb (2.1ms)
+Completed 200 OK in 7ms (Views: 4.5ms | ActiveRecord: 0.2ms)
+Started PATCH "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#update as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"Make it really shiny!", "description"=>"An example ticket, nothing more"}, "commit"=>"Update Ticket", "project_id"=>"1", "id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1  [["project_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "tickets" SET "title" = ?, "updated_at" = ? WHERE "tickets"."id" = 1[0m  [["title", "Make it really shiny!"], ["updated_at", "2014-05-28 04:43:15.849394"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects/1/tickets/1
+Completed 302 Found in 4ms (ActiveRecord: 0.3ms)
+Started GET "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#show as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1  [["project_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.8ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.866452"], ["name", "Example project"], ["updated_at", "2014-05-28 04:43:15.866452"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:43:15.869438"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$PrIydc6cMcjqc/nXlgwgwO1gDDxlLBIWCNtHPfWPJXu4o1Kgg4Ts2"], ["updated_at", "2014-05-28 04:43:15.869438"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "tickets" ("created_at", "description", "project_id", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.871061"], ["description", "An example ticket, nothing more"], ["project_id", 1], ["title", "Example ticket"], ["updated_at", "2014-05-28 04:43:15.871061"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "tickets" SET "updated_at" = ?, "user_id" = ? WHERE "tickets"."id" = 1  [["updated_at", "2014-05-28 04:43:15.872211"], ["user_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 10ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.1ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#show as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1  [["project_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/1/edit" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#edit as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1[0m  [["project_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/_form.html.erb (1.9ms)
+Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.1ms)
+Started PATCH "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by TicketsController#update as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"", "description"=>"An example ticket, nothing more"}, "commit"=>"Update Ticket", "project_id"=>"1", "id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1  [["project_id", 1], ["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendered tickets/_form.html.erb (2.4ms)
+Completed 200 OK in 7ms (Views: 3.5ms | ActiveRecord: 0.2ms)
+  [1m[35m (1.7ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:43:15.948844"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$cErX8u5EsJz1FxxARyIh2Oz2cds8F2.PNX4u.5CS5FTclEr6mhKE6"], ["updated_at", "2014-05-28 04:43:15.948844"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/users/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.7ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-05-28 04:43:15.964943"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$QQ5t5q2Mdr.Imun3ngR.tum.3LNDfvYiXt1KWbOqc/KjCFwEkQXG6"], ["updated_at", "2014-05-28 04:43:15.964943"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#new as HTML
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:43:15.987372"], ["name", "TextMate 2"], ["updated_at", "2014-05-28 04:43:15.987372"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+Started DELETE "/projects/1" for 127.0.0.1 at 2014-05-28 05:43:15 +0100
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "tickets" WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "projects" WHERE "projects"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/projects
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+Started GET "/projects" for 127.0.0.1 at 2014-05-28 05:43:16 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:43:16 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:45:24.426985"], ["name", "Example project"], ["updated_at", "2014-05-28 04:45:24.426985"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:45:24.436852"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$XyIgVr6MZT.lD4SJY5M2Oewjk4.HQFWfbFpCJMkFcM9bSJ32Ylcwu"], ["updated_at", "2014-05-28 04:45:24.436852"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 27ms (Views: 19.2ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (14.9ms)
+Completed 200 OK in 18ms (Views: 16.4ms | ActiveRecord: 0.3ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to http://www.example.com/signin
+Filter chain halted as :require_signin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (10.9ms)
+Completed 200 OK in 13ms (Views: 12.9ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 5ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/_form.html.erb (4.3ms)
+  Rendered tickets/new.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 42ms (Views: 9.1ms | ActiveRecord: 0.3ms)
+Started POST "/projects/1/tickets" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#create as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"Non-standards compliance", "description"=>"it sucks"}, "commit"=>"Create Ticket", "project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  Rendered tickets/_form.html.erb (2.2ms)
+  Rendered tickets/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 9ms (Views: 3.4ms | ActiveRecord: 0.2ms)
+  [1m[36m (1.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:45:24.625073"], ["name", "Example project"], ["updated_at", "2014-05-28 04:45:24.625073"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:45:24.628016"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$s4/UZL2BNPcgYAN2GYtj1uFMyQcxmGAUi03.xCme5Pq.eQLqnNDTK"], ["updated_at", "2014-05-28 04:45:24.628016"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to http://www.example.com/signin
+Filter chain halted as :require_signin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/_form.html.erb (2.1ms)
+  Rendered tickets/new.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 5ms (Views: 3.4ms | ActiveRecord: 0.1ms)
+Started POST "/projects/1/tickets" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#create as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"", "description"=>""}, "commit"=>"Create Ticket", "project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  Rendered tickets/_form.html.erb (3.6ms)
+  Rendered tickets/new.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 9ms (Views: 4.7ms | ActiveRecord: 0.2ms)
+  [1m[36m (10.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:45:24.717175"], ["name", "Example project"], ["updated_at", "2014-05-28 04:45:24.717175"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:45:24.721030"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$L1tM5/rlezmGzC6X9mjnmu3PO3rFhaeEk4q60FC1nwIcR3S12npPq"], ["updated_at", "2014-05-28 04:45:24.721030"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to http://www.example.com/signin
+Filter chain halted as :require_signin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/_form.html.erb (1.8ms)
+  Rendered tickets/new.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 5ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+Started POST "/projects/1/tickets" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#create as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"Non-standards compliance", "description"=>"My pages are ugly!"}, "commit"=>"Create Ticket", "project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tickets" ("created_at", "description", "project_id", "title", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:45:24.774325"], ["description", "My pages are ugly!"], ["project_id", 1], ["title", "Non-standards compliance"], ["updated_at", "2014-05-28 04:45:24.774325"], ["user_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/1/tickets/1
+Completed 302 Found in 4ms (ActiveRecord: 0.4ms)
+Started GET "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:45:24 +0100
+Processing by TicketsController#show as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1[0m  [["project_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/show.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.2ms)
+  [1m[36m (3.4ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:47:35.910492"], ["name", "Example project"], ["updated_at", "2014-05-28 04:47:35.910492"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:47:35.920378"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$FsbJa.vaflTm4ksjT4aROOzPGl07FLi1TT//gXko7YZkj2LmcfUFG"], ["updated_at", "2014-05-28 04:47:35.920378"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:47:35 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 29ms (Views: 19.5ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:47:35 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (15.3ms)
+Completed 200 OK in 19ms (Views: 16.9ms | ActiveRecord: 0.4ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:47:35 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to http://www.example.com/signin
+Filter chain halted as :require_signin! rendered or redirected
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:47:35 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 14ms (Views: 13.2ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.2ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.1ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/_form.html.erb (4.1ms)
+  Rendered tickets/new.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 45ms (Views: 9.0ms | ActiveRecord: 0.3ms)
+Started POST "/projects/1/tickets" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by TicketsController#create as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"", "description"=>""}, "commit"=>"Create Ticket", "project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  Rendered tickets/_form.html.erb (3.7ms)
+  Rendered tickets/new.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 12ms (Views: 4.8ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:47:36.129119"], ["name", "Example project"], ["updated_at", "2014-05-28 04:47:36.129119"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:47:36.132737"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$Zc40eqMskqh4kaELfwmp5.KG4CeMPbTPVgPbpn4.YdAlDkGNTlJYG"], ["updated_at", "2014-05-28 04:47:36.132737"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to http://www.example.com/signin
+Filter chain halted as :require_signin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.1ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/_form.html.erb (1.9ms)
+  Rendered tickets/new.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 5ms (Views: 3.1ms | ActiveRecord: 0.1ms)
+Started POST "/projects/1/tickets" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by TicketsController#create as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"Non-standards compliance", "description"=>"My pages are ugly!"}, "commit"=>"Create Ticket", "project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tickets" ("created_at", "description", "project_id", "title", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", "2014-05-28 04:47:36.186936"], ["description", "My pages are ugly!"], ["project_id", 1], ["title", "Non-standards compliance"], ["updated_at", "2014-05-28 04:47:36.186936"], ["user_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/1/tickets/1
+Completed 302 Found in 4ms (ActiveRecord: 0.4ms)
+Started GET "/projects/1/tickets/1" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by TicketsController#show as HTML
+  Parameters: {"project_id"=>"1", "id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT  "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ? AND "tickets"."id" = ? LIMIT 1[0m  [["project_id", 1], ["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.8ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 04:47:36.205655"], ["name", "Example project"], ["updated_at", "2014-05-28 04:47:36.205655"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 04:47:36.209343"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$eVhAcV8/3boj0/fYHQxdheBI8nS310kUjzTZCSnsenAy1vxsxlmCu"], ["updated_at", "2014-05-28 04:47:36.209343"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to http://www.example.com/signin
+Filter chain halted as :require_signin! rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.1ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+Started GET "/projects/1/tickets/new" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by TicketsController#new as HTML
+  Parameters: {"project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tickets/_form.html.erb (2.0ms)
+  Rendered tickets/new.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 5ms (Views: 3.3ms | ActiveRecord: 0.1ms)
+Started POST "/projects/1/tickets" for 127.0.0.1 at 2014-05-28 05:47:36 +0100
+Processing by TicketsController#create as HTML
+  Parameters: {"utf8"=>"✓", "ticket"=>{"title"=>"Non-standards compliance", "description"=>"it sucks"}, "commit"=>"Create Ticket", "project_id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  Rendered tickets/_form.html.erb (2.3ms)
+  Rendered tickets/new.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 7ms (Views: 3.5ms | ActiveRecord: 0.2ms)
+  [1m[36m (23.2ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-05-28 05:00:50.490239"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$yGwpExUA78frPzRxVe6Ii.5cArGeQIQLyHEpfNkjhjzauHzq2TxNu"], ["updated_at", "2014-05-28 05:00:50.490239"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 39ms (Views: 29.4ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 10ms (Views: 3.9ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+Started GET "/projects/new" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by ProjectsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered projects/_form.html.erb (5.2ms)
+  Rendered projects/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 11ms (Views: 9.6ms | ActiveRecord: 0.4ms)
+Started POST "/projects" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by ProjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "project"=>{"name"=>"", "description"=>""}, "commit"=>"Create Project"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  Rendered projects/_form.html.erb (2.3ms)
+  Rendered projects/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 6ms (Views: 3.4ms | ActiveRecord: 0.2ms)
+  [1m[36m (27.8ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-05-28 05:00:50.649792"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$XhoHRVncHaGOqpftqNjWl.I3hpylHbhdQalypTJqlotVkbzGmIOte"], ["updated_at", "2014-05-28 05:00:50.649792"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+Started GET "/projects/new" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by ProjectsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered projects/_form.html.erb (1.7ms)
+  Rendered projects/new.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+Started POST "/projects" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by ProjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "project"=>{"name"=>"TextMate 2", "description"=>"A text editor for OS-X"}, "commit"=>"Create Project"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "projects" ("created_at", "description", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2014-05-28 05:00:50.708567"], ["description", "A text editor for OS-X"], ["name", "TextMate 2"], ["updated_at", "2014-05-28 05:00:50.708567"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/1
+Completed 302 Found in 4ms (ActiveRecord: 1.2ms)
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:00:50 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (14.9ms)
+Completed 200 OK in 18ms (Views: 16.3ms | ActiveRecord: 0.3ms)
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."name" = 'TextMate 2'  ORDER BY "projects"."id" ASC LIMIT 1
+  [1m[36m (0.9ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-05-28 05:10:40.550547"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$dIBqhCw.ct2ZbyFB4eKV9upc07vB7IzaCyyy47wtINmJ.ujeKNhxa"], ["updated_at", "2014-05-28 05:10:40.550547"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:10:40 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 36ms (Views: 28.0ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:10:40 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:10:40 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 7ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:10:40 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 05:10:40.638649"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$WSmF.yvw9jslLHC1iyQFV.qtGbPnqI5K01NHYCN70kCY./xVuWvUa"], ["updated_at", "2014-05-28 05:10:40.638649"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:10:40 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.2ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-05-28 05:11:02.288382"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$LGjqyjzABkagKoNYHkB04OeVu8lFuPfoNWIvcqWJRiZCfy/GaApuy"], ["updated_at", "2014-05-28 05:11:02.288382"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:11:02 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 36ms (Views: 28.4ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:11:02 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:11:02 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 9ms (Views: 4.3ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:11:02 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 05:11:02.380286"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$hbiNCWNcwR1XCN2HdQaN3eraOI716RBdLIhHnMwDZGeZPSOWrRFp6"], ["updated_at", "2014-05-28 05:11:02.380286"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:11:02 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:11:02 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:11:02 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:11:02 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.5ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:11:02 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.2ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:22:33 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 31ms (Views: 18.7ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-05-28 05:22:33.204047"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$f.xE/RcMAAKH5Fa1yyrRmelAbbtLCAHT9FRgEwTFxBKRyPCx9YNgu"], ["updated_at", "2014-05-28 05:22:33.204047"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:22:33 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (37.9ms)
+Completed 200 OK in 41ms (Views: 40.3ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:22:33 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:22:33 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:22:33 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 05:22:33.282647"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$63y/DPsS5VDBdi9ZHnexkuTdXtttzg0olrfH7rnA0qKk0Qa22wvJe"], ["updated_at", "2014-05-28 05:22:33.282647"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:22:33 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:22:33 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:22:33 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:22:33 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:23:04 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 30ms (Views: 18.7ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 05:23:04.331536"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$yaaVySdGj/zDlNEiR0YBmerQb2kxDIxHt5xBlUHS5x57l6wv6W8fm"], ["updated_at", "2014-05-28 05:23:04.331536"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:23:04 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (38.4ms)
+Completed 200 OK in 41ms (Views: 40.6ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:23:04 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:23:04 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:23:04 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms)
+  [1m[35m (51.9ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-05-28 05:23:04.461695"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$wgcCgOtDDGXw2nRx/xpZtunpoJT62hNWnd9aJsbVdT2fyWCZRVaYa"], ["updated_at", "2014-05-28 05:23:04.461695"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:23:04 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:23:04 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:23:04 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:23:04 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:29:10 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 30ms (Views: 18.5ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 05:29:10.983634"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$1C8MJ0QPqbpZGVejlaLKFuvmcGl2ZYm4k4WGEsJJMYIvEyzAiwWJa"], ["updated_at", "2014-05-28 05:29:10.983634"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:29:10 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (12.5ms)
+Completed 200 OK in 15ms (Views: 14.8ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:29:11 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:29:11 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:29:11 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-05-28 05:29:11.037516"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$fEfT2uV4PbSEZpkNYxPw.OID.pAixhd42jQjxcoXpymOo5786LTL6"], ["updated_at", "2014-05-28 05:29:11.037516"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:29:11 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 2ms (Views: 2.0ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:29:11 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:29:11 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:29:11 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-05-28 05:35:41.019910"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$GqPTQgfApj/eL4yFwCK0g.Q6lUh3EzoK5T.yNuhcxnQCvSdXsl6Am"], ["updated_at", "2014-05-28 05:35:41.019910"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 41ms (Views: 30.8ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 8ms (Views: 3.5ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 05:35:41.112100"], ["name", "Example project"], ["updated_at", "2014-05-28 05:35:41.112100"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 20ms (Views: 18.1ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 05:35:41.142976"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$1FmGmG1J2tWCP7Lb/6qh/uhXk3Uuixc57hgcGl1ormTnSA5gGUSyu"], ["updated_at", "2014-05-28 05:35:41.142976"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.7ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 05:35:41.198813"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$tfyMlfkDwHUSijpFPO51fOsGlw5qn.44wmPszH1AOLJjQTcgg.Ubm"], ["updated_at", "2014-05-28 05:35:41.198813"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 05:35:41.218632"], ["name", "Example project"], ["updated_at", "2014-05-28 05:35:41.218632"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 05:35:41.229949"], ["name", "Example project"], ["updated_at", "2014-05-28 05:35:41.229949"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.8ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 05:35:41.247975"], ["name", "Example project"], ["updated_at", "2014-05-28 05:35:41.247975"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+  [1m[35m (2.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-05-28 05:35:41.262324"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$Jjzeo1z21tB3iwzU6BTuz.IbrX466vceuRm16YWmqo150X9KLM9Jm"], ["updated_at", "2014-05-28 05:35:41.262324"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 2.0ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 05:35:41.285826"], ["name", "Example project"], ["updated_at", "2014-05-28 05:35:41.285826"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-05-28 05:35:41.297173"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$iE.ZZ/ZYoN0//WjJBUlNxOGiv78cOupyk60Ij72KxS0Fz.Ak.plYm"], ["updated_at", "2014-05-28 05:35:41.297173"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-05-28 05:35:41.327037"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$/xU8dZM4pJLjYXu0FaJ3gu9ojRv2X1NFsMcSeAU3Nc52YOVkmHNte"], ["updated_at", "2014-05-28 05:35:41.327037"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 05:35:41.348693"], ["name", "Example project"], ["updated_at", "2014-05-28 05:35:41.348693"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:35:41 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+  [1m[35m (2.4ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-05-28 05:37:31.242203"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$G630Z6uKoVKOc8aa1LRR6egCj8YXi9RwseIeMO/c90zmOIzy3cxUW"], ["updated_at", "2014-05-28 05:37:31.242203"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 36ms (Views: 28.2ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 8ms (Views: 3.6ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 05:37:31.328016"], ["name", "Example project"], ["updated_at", "2014-05-28 05:37:31.328016"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.2ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.1ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 21ms (Views: 19.7ms | ActiveRecord: 0.5ms)
+  [1m[36m (1.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-05-28 05:37:31.361285"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$ONTg0iqcxJ5FIdwfBkHNReHnvcMhngoxSDT1ej7xzdiUbELd1/mzS"], ["updated_at", "2014-05-28 05:37:31.361285"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+  [1m[36m (1.9ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-05-28 05:37:31.415276"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$JdNIB14J3Y9e5H19y8OPy.ieZ/U1JZI92lxHbF8eY7FpVm.mrJj56"], ["updated_at", "2014-05-28 05:37:31.415276"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 05:37:31.436068"], ["name", "Example project"], ["updated_at", "2014-05-28 05:37:31.436068"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.0ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTicket Load (0.0ms)[0m  SELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 05:37:31.446183"], ["name", "Example project"], ["updated_at", "2014-05-28 05:37:31.446183"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mProject Load (0.2ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-05-28 05:37:31.463183"], ["name", "Example project"], ["updated_at", "2014-05-28 05:37:31.463183"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProject Load (0.1ms)[0m  SELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.7ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 05:37:31.475216"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$3Kn7FbDDdEpJxlKjyqUymOsaYncnOAx1.o6sj0VXBnNxjBy0tsVeK"], ["updated_at", "2014-05-28 05:37:31.475216"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 05:37:31.496119"], ["name", "Example project"], ["updated_at", "2014-05-28 05:37:31.496119"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.1ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 05:37:31.508376"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$.tTDXN2dYcVcehXEKZgLEO3rYlxFfkTMOBbJfGn53rP5B/OuS5NAq"], ["updated_at", "2014-05-28 05:37:31.508376"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 2ms (Views: 2.0ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms)
+  [1m[35m (29.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-05-28 05:37:31.564700"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$boKsg4DkMRDFkpW5xacA9u.cxjo5m0GRspYMbTv245C10gk80PYT."], ["updated_at", "2014-05-28 05:37:31.564700"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "projects" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-05-28 05:37:31.584765"], ["name", "Example project"], ["updated_at", "2014-05-28 05:37:31.584765"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Started GET "/projects/1" for 127.0.0.1 at 2014-05-28 06:37:31 +0100
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.0ms)[0m  [1mSELECT  "projects".* FROM "projects"  WHERE "projects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTicket Load (0.0ms)[0m  [1mSELECT "tickets".* FROM "tickets"  WHERE "tickets"."project_id" = ?[0m  [["project_id", 1]]
+  Rendered projects/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.7ms)[0m  rollback transaction
