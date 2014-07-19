@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <title>
   	<% if content_for?(:title) %>
   		<%= yield(:title) %>
@@ -8,15 +9,26 @@
   		Project Tracker
   	<% end %>
   </title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
 
 <nav>
   <%= link_to "Sign up", new_user_path %>
   <%= link_to "Sign in", signin_path %>
+
+  <% if current_user %>
+    Signed in as <%= current_user.email %>
+    <% admins_only do %>
+      <%= link_to "Admin", admin_root_path %> 
+    <% end %> 
+  <% else %>
+    Blah
+  <% end %>
 </nav>
 
 <% flash.each do |key,value| %>

@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
-  
+
   namespace :admin do
+    root :to => "base#index"
     resources :users
   end
-
-  #get 'users/new'
-#
-  #get 'users/create'
-#
-  #get 'users/show'
 
   get '/signin', to: "sessions#new"
 
@@ -17,9 +12,9 @@ Rails.application.routes.draw do
   root "projects#index"
 
   resources :projects do
-  	resources :tickets
+    resources :tickets
   end
 
   resources :users
-  
+
 end
