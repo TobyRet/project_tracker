@@ -16596,3 +16596,609 @@ Processing by TicketsController#show as HTML
   Rendered tickets/show.html.erb within layouts/application (1.2ms)
 Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.2ms)
   [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:44:44.001925"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$NeBIl9fIhpUdj1cKDgBFEOhTXH37vvCUrsgKmWzRvy79F6Mhps8Mq"], ["updated_at", "2014-07-19 23:44:44.001925"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (19.5ms)
+Completed 200 OK in 49ms (Views: 39.0ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 6ms (Views: 4.7ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (2.7ms)
+  Rendered admin/users/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 8ms (Views: 7.4ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:44:44.138990"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$rixyADz2jw1UxCkbJ9078uAv9t3yEbFMLniYiuLHEcbAlA5pXsxM2"], ["updated_at", "2014-07-19 23:44:44.138990"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.2ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (1.8ms)
+  Rendered admin/users/new.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 0.1ms)
+Started POST "/admin/users" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by Admin::UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"newbie@example.com", "password"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: email
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "users" ("created_at", "password_digest", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-07-19 23:44:44.189154"], ["password_digest", "$2a$04$CkBaCKpyzc117.nrY0FG6eijgLgPdxTiG6/r5Mat48RKOHgCJjevK"], ["updated_at", "2014-07-19 23:44:44.189154"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/admin/users
+Completed 302 Found in 5ms (ActiveRecord: 1.6ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:44:44 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"   ORDER BY "users"."email" ASC
+  Rendered admin/users/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+  [1m[36m (11.6ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:46:30.100762"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$fSLq8dZuosUgeyaoG.w4J.W1bvklPzdMuIzyzcaBQDDQu9bi4COHi"], ["updated_at", "2014-07-19 23:46:30.100762"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (18.8ms)
+Completed 200 OK in 46ms (Views: 37.2ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 8ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 6ms (Views: 4.7ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (44.1ms)
+  Rendered admin/users/new.html.erb within layouts/application (47.0ms)
+Completed 200 OK in 50ms (Views: 49.3ms | ActiveRecord: 0.1ms)
+Started POST "/admin/users" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "admin"=>"1"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: email, admin
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("created_at", "password_digest", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-07-19 23:46:30.278829"], ["password_digest", "$2a$04$zSbWVHU58XyW2KyvS0gAxOdhO0z6LSh1xIALFQG9C5ymgJmPwIuZC"], ["updated_at", "2014-07-19 23:46:30.278829"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/admin/users
+Completed 302 Found in 5ms (ActiveRecord: 1.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"   ORDER BY "users"."email" ASC
+  Rendered admin/users/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:46:30.292883"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$sXjGi41vfOrLveO7uPNlu.Z0TOkKCtsX2sROeifHslkrjMoP8wuw."], ["updated_at", "2014-07-19 23:46:30.292883"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (2.0ms)
+  Rendered admin/users/new.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.1ms)
+Started POST "/admin/users" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"newbie@example.com", "password"=>"[FILTERED]", "admin"=>"0"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: email, admin
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "password_digest", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-07-19 23:46:30.340497"], ["password_digest", "$2a$04$uX6f.jFATWqOOqhLyvlsU.aS7GUWXvay87enPWy1wzOuVV9l2SVC2"], ["updated_at", "2014-07-19 23:46:30.340497"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/admin/users
+Completed 302 Found in 5ms (ActiveRecord: 0.5ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:46:30 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"   ORDER BY "users"."email" ASC
+  Rendered admin/users/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:49:49.400278"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$fHOQrEhgwEG4dGknv4jA7uuSUbaAr36etOo3lm.z6jkJl5cyQQj4S"], ["updated_at", "2014-07-19 23:49:49.400278"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (21.3ms)
+Completed 200 OK in 49ms (Views: 40.5ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 8ms (Views: 3.9ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (4.0ms)
+  Rendered admin/users/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 10ms (Views: 8.6ms | ActiveRecord: 0.1ms)
+Started POST "/admin/users" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"newbie@example.com", "password"=>"[FILTERED]", "admin"=>"0"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: email, admin
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO "users" ("created_at", "password_digest", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-07-19 23:49:49.535924"], ["password_digest", "$2a$04$Um8Yeh.4tsNLHUiwH0BGuuGVjLYTGXzkRqvC.wFFnUErvgCsvKCD."], ["updated_at", "2014-07-19 23:49:49.535924"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/admin/users
+Completed 302 Found in 5ms (ActiveRecord: 1.3ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"   ORDER BY "users"."email" ASC
+  Rendered admin/users/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:49:49.548211"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$GFKzxxW2jST9uybFMaWgV.VYNLHq03xw.1rj28ol0sRGqpRC3haZW"], ["updated_at", "2014-07-19 23:49:49.548211"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (1.8ms)
+  Rendered admin/users/new.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.1ms)
+Started POST "/admin/users" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "admin"=>"1"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: email, admin
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "password_digest", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-07-19 23:49:49.597558"], ["password_digest", "$2a$04$cB2XLZTXlsUTL5wJE7MQW.ZKM1QnrHIGVVG8dHyAsvnGP15YIm4SK"], ["updated_at", "2014-07-19 23:49:49.597558"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/admin/users
+Completed 302 Found in 4ms (ActiveRecord: 0.5ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:49:49 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"   ORDER BY "users"."email" ASC
+  Rendered admin/users/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:51:14.328459"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$ZrW/4YXvQyPJ4aF9psR8qudIi6YK.HCnPva/p.HF7Ij6N/jdQpPLq"], ["updated_at", "2014-07-19 23:51:14.328459"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 46ms (Views: 37.8ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 8ms (Views: 3.8ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (4.1ms)
+  Rendered admin/users/new.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 10ms (Views: 8.8ms | ActiveRecord: 0.1ms)
+Started POST "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"newbie@example.com", "password"=>"[FILTERED]", "admin"=>"0"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: email, admin
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "users" ("created_at", "password_digest", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-07-19 23:51:14.465130"], ["password_digest", "$2a$04$Fcp3GqBrxS5DFqsc9jYmVOVwTzTKz4nKq7bEJwE88sIkltWGRl9Ym"], ["updated_at", "2014-07-19 23:51:14.465130"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/admin/users
+Completed 302 Found in 5ms (ActiveRecord: 1.2ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"   ORDER BY "users"."email" ASC
+  Rendered admin/users/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:51:14.477763"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$WJV2eTUfFPwBxSFoNYX3KOWr5QuUPWip3vrvt7l8mbpiJfIKTD80a"], ["updated_at", "2014-07-19 23:51:14.477763"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 2ms (Views: 2.2ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (1.8ms)
+  Rendered admin/users/new.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.1ms)
+Started POST "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "admin"=>"1"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: email, admin
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "password_digest", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-07-19 23:51:14.525880"], ["password_digest", "$2a$04$wiSI.pZBUMeiRG297qB3wOL.TEhP91uhSq8rybFjWuyS3js2U7NVu"], ["updated_at", "2014-07-19 23:51:14.525880"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/admin/users
+Completed 302 Found in 4ms (ActiveRecord: 0.5ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:14 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"   ORDER BY "users"."email" ASC
+  Rendered admin/users/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.7ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:51:28.369825"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$TGlAp8HAElgBOfldw71Xdeoq1YFYH5GiMZ7lQnh6edd7bwn/2mhCC"], ["updated_at", "2014-07-19 23:51:28.369825"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (19.5ms)
+Completed 200 OK in 48ms (Views: 38.4ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 8ms (Views: 3.9ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (4.1ms)
+  Rendered admin/users/new.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 10ms (Views: 8.8ms | ActiveRecord: 0.1ms)
+Started POST "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"newbie@example.com", "password"=>"[FILTERED]", "admin"=>"0"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "password_digest", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2014-07-19 23:51:28.507530"], ["email", "newbie@example.com"], ["password_digest", "$2a$04$i9CXZBQZ7YWGOKPdD6dob.wnCOSuoQNSC0lpuWd9QsmZl/6XVpu6i"], ["updated_at", "2014-07-19 23:51:28.507530"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/admin/users
+Completed 302 Found in 5ms (ActiveRecord: 1.4ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"   ORDER BY "users"."email" ASC
+  Rendered admin/users/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("admin", "created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["admin", "t"], ["created_at", "2014-07-19 23:51:28.521161"], ["email", "sample@example.com"], ["name", "username"], ["password_digest", "$2a$04$cozbCGauEY8ql7afoAhcD.OAOhzjJsHAQoIKGT.rL39lxfKKo7BzC"], ["updated_at", "2014-07-19 23:51:28.521161"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/signin" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+Started POST "/signin" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "signin"=>{"name"=>"username", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."name" = 'username'  ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://www.example.com/
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms)
+Started GET "/" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by ProjectsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mProject Load (0.1ms)[0m  SELECT "projects".* FROM "projects"
+  Rendered projects/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+Started GET "/admin" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::BaseController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered admin/base/index.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"   ORDER BY "users"."email" ASC[0m
+  Rendered admin/users/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+Started GET "/admin/users/new" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::UsersController#new as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered admin/users/_form.html.erb (2.4ms)
+  Rendered admin/users/new.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.1ms)
+Started POST "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "admin"=>"1"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("admin", "created_at", "email", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["admin", "t"], ["created_at", "2014-07-19 23:51:28.570740"], ["email", "admin@example.com"], ["password_digest", "$2a$04$lfJuMY8GATQ.VLaj0pedpunEJ7uEcSk3jrpCphTxzeeGuMHvxdHyy"], ["updated_at", "2014-07-19 23:51:28.570740"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://www.example.com/admin/users
+Completed 302 Found in 4ms (ActiveRecord: 0.5ms)
+Started GET "/admin/users" for 127.0.0.1 at 2014-07-20 00:51:28 +0100
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"   ORDER BY "users"."email" ASC
+  Rendered admin/users/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
